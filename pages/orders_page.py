@@ -4,7 +4,7 @@ from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 
 
-class HeaderOrderPom:
+class OrdersPage:
     driver = None
 
     pop_up_agreement_cookies = [By.ID, 'rcc-confirm-button']
@@ -17,8 +17,7 @@ class HeaderOrderPom:
     input_phone_number = [By.XPATH, '//*[@id="root"]/div/div[2]/div[2]/div[5]/input']
     next_button = [By.XPATH, '//*[@id="root"]/div/div[2]/div[3]/button']
     when_to_bring_scooter = [By.XPATH, '//*[@id="root"]/div/div[2]/div[2]/div[1]/div[1]/div/input']
-    input_when_to_bring_scooter = [By.XPATH,
-                                   '//*[@id="root"]/div/div[2]/div[2]/div[1]/div[2]/div[2]/div/div/div[2]/div[2]/div[6]/div[1]']
+    input_when_to_bring_scooter = [By.XPATH, '//*[@id="root"]/div/div[2]/div[2]/div[1]/div[2]/div[2]/div/div/div[2]/div[2]/div[3]/div[1]']
     rental_period = [By.XPATH, '//*[@id="root"]/div/div[2]/div[2]/div[2]/div/div[1]']
     input_rental_period = [By.XPATH, '//*[@id="root"]/div/div[2]/div[2]/div[2]/div[2]/div[2]']
     color_of_scooter = [By.XPATH, '//*[@id="black"]']
@@ -31,6 +30,10 @@ class HeaderOrderPom:
     logo_scooter = [By.CLASS_NAME, 'Header_LogoScooter__3lsAR']
     redirect_yandex_ru = 'https://dzen.ru/?yredirect=true'
     dzen_content_div = [By.CLASS_NAME, 'content']
+    order_text_pattern_1 = (r"Заказ оформлен\n"
+                              r"Номер заказа: \d+.  Запишите его:\n"
+                              r"пригодится, чтобы отслеживать статус")
+
 
     def __init__(self, driver):
         self.driver = driver
@@ -148,57 +151,3 @@ class HeaderOrderPom:
     def current_url(self):
         return self.driver.current_url
 
-    def order_from_header_button(self):
-        self.click_order_button_header()
-        self.find_element_and_click_input_name()
-        self.input_name_in()
-        self.find_element_and_click_input_surname()
-        self.input_surname_in()
-        self.find_element_and_click_input_address()
-        self.input_address_in()
-        self.find_and_click_metro_station()
-        self.wait_before_choose_station()
-        self.click_on_metro_station()
-        self.find_and_click_phone_number()
-        self.input_phone_number_in()
-        self.click_next_button()
-        self.find_and_click_when_to_bring_scooter()
-        self.choose_when_to_bring_scooter()
-        self.find_and_click_rental_period()
-        self.choose_rental_period()
-        self.choose_color_of_scooter()
-        self.click_order_button()
-        self.click_yes_button()
-        self.wait_to_proceed_banner()
-
-    def order_from_button(self):
-        self.click_on_button_order()
-        self.find_element_and_click_input_name()
-        self.input_name_in()
-        self.find_element_and_click_input_surname()
-        self.input_surname_in()
-        self.find_element_and_click_input_address()
-        self.input_address_in()
-        self.find_and_click_metro_station()
-        self.wait_before_choose_station()
-        self.click_on_metro_station()
-        self.find_and_click_phone_number()
-        self.input_phone_number_in()
-        self.click_next_button()
-        self.find_and_click_when_to_bring_scooter()
-        self.choose_when_to_bring_scooter()
-        self.find_and_click_rental_period()
-        self.choose_rental_period()
-        self.choose_color_of_scooter()
-        self.click_order_button()
-        self.click_yes_button()
-        self.wait_to_proceed_banner()
-
-    def url_from_logo_yandex(self):
-        self.click_on_yandex_logo()
-        self.driver.switch_to.window(self.driver.window_handles[1])
-        self.wait_to_open_dzen_window()
-
-    def url_from_logo_scooter(self):
-        self.click_on_button_order()
-        self.click_on_logo_scooter()
